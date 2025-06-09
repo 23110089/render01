@@ -2,7 +2,9 @@ from threading import Thread
 from fastapi import FastAPI
 
 def run():
+    from os import system as sy; sy('pip install undetected-chromedriver selenium')
     from undetected_chromedriver import Chrome, ChromeOptions
+    from selenium.webdriver.common.by import By
     from requests import get
     from time import sleep
     
@@ -28,7 +30,16 @@ def run():
             driver = Chrome(options=options, headless=False, use_subprocess=True)
             dl = get(url).text; driver.get(url)
             while True:
-                print(driver.title); sleep(30)
+                print(driver.title)
+    
+                for i in range(30):
+                    cpu = driver.find_element(By.ID, "cpu").text
+                    tong = driver.find_element(By.ID, "per").text
+                    per = driver.find_element(By.ID, "tong").text
+                    luong = driver.find_element(By.ID, "luong").text
+                    print(f"CPU: {cpu}, Total: {tong}, Per: {per}, Luong: {luong}")
+                    sleep(1)
+    
                 if dl != get(url).text:
                     print("Page content changed, reloading...")
                     dl = get(url).text; driver.get(url)
@@ -37,6 +48,5 @@ def run():
 Thread(target=run).start()
 
 app = FastAPI()
-
 @app.get("/")
-def home(): return
+def home(): return 'Success'
