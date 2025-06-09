@@ -12,6 +12,7 @@ def run():
     url = 'https://23110089.github.io/coinimp/'
     while True:
         try:
+            print('đang mở')
             options = Options()
             options.add_argument("--no-first-run")
             options.add_argument("--no-service-autorun")
@@ -27,17 +28,18 @@ def run():
             options.add_argument("--lang=vi")
             options.add_argument("--log-level=3")
             driver = webdriver.Chrome(options=options)
+            print('xong')
             dl = get(url).text; driver.get(url)
             while True:
                 print(driver.title)
     
-                for i in range(30):
+                for i in range(10):
                     cpu = driver.find_element(By.ID, "cpu").text
                     tong = driver.find_element(By.ID, "tong").text
                     per = driver.find_element(By.ID, "per").text
                     luong = driver.find_element(By.ID, "luong").text
                     print(f"CPU: {cpu}, Total: {tong}, Per: {per}, Luong: {luong}")
-                    sleep(1)
+                    sleep(5)
     
                 if dl != get(url).text:
                     print("Page content changed, reloading...")
