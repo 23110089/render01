@@ -2,8 +2,9 @@ from threading import Thread
 from fastapi import FastAPI
 
 def run():
-    from os import system as sy; sy('pip install undetected-chromedriver selenium')
-    from undetected_chromedriver import Chrome, ChromeOptions
+    from os import system as sy; sy('pip install selenium')
+    from selenium import webdriver
+    from selenium.webdriver.chrome.options import Options
     from selenium.webdriver.common.by import By
     from requests import get
     from time import sleep
@@ -11,7 +12,7 @@ def run():
     url = 'https://23110089.github.io/coinimp/'
     while True:
         try:
-            options = ChromeOptions()
+            options = Options()
             options.add_argument("--no-first-run")
             options.add_argument("--no-service-autorun")
             options.add_argument("--password-store=basic")
@@ -25,15 +26,15 @@ def run():
             options.add_argument("--disable-setuid-sandbox")
             options.add_argument("--lang=vi")
             options.add_argument("--log-level=3")
-            driver = Chrome(options=options, headless=True, use_subprocess=True)
+            driver = webdriver.Chrome(options=options)
             dl = get(url).text; driver.get(url)
             while True:
                 print(driver.title)
     
                 for i in range(30):
                     cpu = driver.find_element(By.ID, "cpu").text
-                    tong = driver.find_element(By.ID, "per").text
-                    per = driver.find_element(By.ID, "tong").text
+                    tong = driver.find_element(By.ID, "tong").text
+                    per = driver.find_element(By.ID, "per").text
                     luong = driver.find_element(By.ID, "luong").text
                     print(f"CPU: {cpu}, Total: {tong}, Per: {per}, Luong: {luong}")
                     sleep(1)
