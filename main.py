@@ -2,7 +2,7 @@ from threading import Thread
 from fastapi import FastAPI
 
 def run():
-    from os import system as sy; sy('pip install selenium')
+    from os import system as sy; sy('pip install selenium requests')
     from selenium import webdriver
     from selenium.webdriver.chrome.options import Options
     from selenium.webdriver.common.by import By
