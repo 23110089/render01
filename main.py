@@ -2,7 +2,6 @@ def run(): import run
 from threading import Thread
 Thread(target=run).start()
 
-from requests import get
 from fastapi import FastAPI, Query
 from fastapi.responses import JSONResponse
 import subprocess, json, os
